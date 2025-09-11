@@ -7,7 +7,15 @@
     <title>Vite + TS</title>
   </head>
   <body>
+    <button id="start-activity">Launch Activity in Main Stage.</button>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script>
+      document.body.onload = () => {
+        // Library name (`helloWorld`) is defined in the webpack config.
+        // The function (`setUpAddon`) is defined in main.js.
+        setUpAddon();
+      };
+    </script>
   </body>
 </html>
