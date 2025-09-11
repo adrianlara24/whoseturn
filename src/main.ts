@@ -8,21 +8,13 @@ import { setupCounter } from "./counter.ts";
 const CLOUD_PROJECT_NUMBER = "564187822400";
 const MAIN_STAGE_URL = "https://adrianlara24.github.io/whoseturn/";
 
-export async function setUpAddon() {
-  const session = await meet.addon.createAddonSession({
-    cloudProjectNumber: CLOUD_PROJECT_NUMBER,
-  });
-  const sidePanelClient = await session.createSidePanelClient();
-  (document as any)
-    .getElementById("start-activity")
-    .addEventListener("click", async () => {
-      await sidePanelClient.startActivity({
-        mainStageUrl: MAIN_STAGE_URL,
-      });
-    });
-}
-
-await setUpAddon();
+const session = await meet.addon.createAddonSession({
+  cloudProjectNumber: CLOUD_PROJECT_NUMBER,
+});
+const sidePanelClient = await session.createSidePanelClient();
+await sidePanelClient.startActivity({
+  mainStageUrl: MAIN_STAGE_URL,
+});
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
