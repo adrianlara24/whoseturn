@@ -1,9 +1,32 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { meet } from "@googleworkspace/meet-addons/meet.addons";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+import "./style.css";
+import typescriptLogo from "./typescript.svg";
+import viteLogo from "/vite.svg";
+import { setupCounter } from "./counter.ts";
+
+const CLOUD_PROJECT_NUMBER = "564187822400";
+const MAIN_STAGE_URL = "https://adrianlara24.github.io/whoseturn/";
+
+/**
+ * Prepares the add-on Side Panel Client, and adds an event to launch the
+ * activity in the main stage when the main button is clicked.
+ */
+export async function setUpAddon() {
+  const session = await meet.addon.createAddonSession({
+    cloudProjectNumber: CLOUD_PROJECT_NUMBER,
+  });
+  const sidePanelClient = await session.createSidePanelClient();
+  (document as any)
+    .getElementById("start-activity")
+    .addEventListener("click", async () => {
+      await sidePanelClient.startActivity({
+        mainStageUrl: MAIN_STAGE_URL,
+      });
+    });
+}
+
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vite.dev" target="_blank">
       <img src="${viteLogo}" class="logo" alt="Vite logo" />
@@ -19,6 +42,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       Click on the Vite and TypeScript logos to learn more
     </p>
   </div>
-`
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
