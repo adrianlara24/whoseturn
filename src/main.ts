@@ -8,10 +8,6 @@ import { setupCounter } from "./counter.ts";
 const CLOUD_PROJECT_NUMBER = "564187822400";
 const MAIN_STAGE_URL = "https://adrianlara24.github.io/whoseturn/";
 
-/**
- * Prepares the add-on Side Panel Client, and adds an event to launch the
- * activity in the main stage when the main button is clicked.
- */
 export async function setUpAddon() {
   const session = await meet.addon.createAddonSession({
     cloudProjectNumber: CLOUD_PROJECT_NUMBER,
@@ -25,6 +21,8 @@ export async function setUpAddon() {
       });
     });
 }
+
+await setUpAddon();
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
